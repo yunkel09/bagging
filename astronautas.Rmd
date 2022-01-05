@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE, fig.width = 8, fig.height = 5)
 
 *This template offers an opinionated guide on how to structure a modeling analysis. Your individual modeling analysis may require you to add to, subtract from, or otherwise change this structure, but consider this a general framework to start from. If you want to learn more about using tidymodels, check out our [Getting Started](https://www.tidymodels.org/start/) guide.*
 
-In this example analysis, let's fit a model to predict [the sex of penguins](https://allisonhorst.github.io/palmerpenguins/) from species and measurement information.
+In this example analysis, let's fit a model to predict [the sex of astronauts](https://allisonhorst.github.io/palmerastronauts/) from species and measurement information.
 
 ```{r}
 library(tidytuesdayR)
@@ -22,9 +22,9 @@ library(tidyverse)
 
 astronauts <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-07-14/astronauts.csv")
 
-glimpse(penguins)
+glimpse(astronauts)
 
-penguins <- na.omit(penguins)
+astronauts <- na.omit(astronauts)
 ```
 
 ```{r}
@@ -38,7 +38,7 @@ usethis::use_github()
 Exploratory data analysis (EDA) is an [important part of the modeling process](https://www.tmwr.org/software-modeling.html#model-phases).
 
 ```{r}
-penguins %>%
+astronauts %>%
   ggplot(aes(bill_depth_mm, bill_length_mm, color = sex, size = body_mass_g)) +
   geom_point(alpha = 0.5) +
   facet_wrap(~species) +
@@ -55,7 +55,7 @@ Let's consider how to [spend our data budget](https://www.tmwr.org/splitting.htm
 
 ```{r}
 set.seed(123)
-penguin_split <- initial_split(penguins, strata = sex)
+penguin_split <- initial_split(astronauts, strata = sex)
 penguin_train <- training(penguin_split)
 penguin_test <- testing(penguin_split)
 
